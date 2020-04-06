@@ -85,6 +85,26 @@ app.get("/campgrounds/:id/comments/new", (req, res) => {
     })
 })
 
+app.post("/campgrounds/:id/comments", (req, res) => {
+    Campground.findById(req.params.id, (err, campground) => {
+        if (err) {
+            console.log(err)
+        }
+        else {
+            Comment.create(req.body.comment, (err, comment) => {
+                if (err) {
+                    console.log(err);
+                }
+                else {
+                    campground.comments.push(comment);
+                    campground.save();
+                    res.redirect("/campgrounds/" + campground._id);
+                }
+            })
+        }
+    })
+})
+
 
 app.listen(3000, () => {
     console.log("Running!");

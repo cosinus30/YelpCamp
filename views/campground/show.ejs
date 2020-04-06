@@ -4,6 +4,10 @@
 
 <img src="<%=campground.image%>" alt="" />
 
+<p>
+    <a class="btn btn-success" href="/campgrounds/<%= campground._id %>/comments/new">Add new comment</a>
+</p>
+
 <p><%=campground.description%></p>
 
 <% campground.comments.forEach((comment) => { %>
