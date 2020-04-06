@@ -2,7 +2,9 @@ var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
+var seedDb = require("./seeddb");
 
+seedDb();
 //MODELS
 var Campground = require("./models/campground");
 var Comment = require("./models/comment");
@@ -28,7 +30,7 @@ app.get("/campgrounds", (req, res) => {
         if (err) {
             console.log(err);
         } else {
-            res.render("index", { campgrounds: allCampgrounds });
+            res.render("campground/index", { campgrounds: allCampgrounds });
         }
     });
 });
@@ -36,10 +38,10 @@ app.get("/campgrounds", (req, res) => {
 //one is get one is post
 app.post("/campgrounds", (req, res) => {
     //retrieve data from form
-    var name = req.body.name;
-    var image = req.body.image;
-    var description = req.body.description;
-    var newCampground = { name: name, image: image, description: description };
+    var name = req.body.campground.name;
+    var image = req.body.campground.image;
+    var description = req.body.campground.description;
+    var newCampground = { name: name, image: image, description: description }
     //create a new campground and save to DB
     Campground.create(newCampground, (err, newlyCreated) => {
         if (err) {
@@ -52,20 +54,37 @@ app.post("/campgrounds", (req, res) => {
 });
 
 app.get("/campgrounds/new", (req, res) => {
-    res.render("new");
+    res.render("campground/new");
 });
 
+
+//SHOW ROUTE
 app.get("/campgrounds/:id", (req, res) => {
     //find the campground with provided id
     //render that item.
-    Campground.findById(req.params.id, (err, foundCampground) => {
+    Campground.findById(req.params.id).populate("comments").exec((err, foundCampground) => {
         if (err) {
             console.log(err);
         } else {
-            res.render("show", { campground: foundCampground });
+            res.render("campground/show", { campground: foundCampground });
         }
     });
 });
+
+// ! ====================================== !
+
+app.get("/campgrounds/:id/comments/new", (req, res) => {
+    //find campground by id
+    Campground.findById(req.params.id, (err, campground) => {
+        if (err) {
+            console.log(err)
+        }
+        else {
+            res.render("comments/new", { campground: campground })
+        }
+    })
+})
+
 
 app.listen(3000, () => {
     console.log("Running!");
