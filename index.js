@@ -3,12 +3,14 @@ var app = express();
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var seedDb = require("./seeddb");
+var passport = require("passport");
+var localStrategy = require("passport-local");
 
 seedDb();
 //MODELS
 var Campground = require("./models/campground");
 var Comment = require("./models/comment");
-
+var User = require("./models/user")
 
 mongoose.connect("mongodb://localhost:27017/yelp_camp", {
     useNewUrlParser: true,
@@ -20,13 +22,31 @@ app.use(bodyParser.urlencoded({ encoded: true }));
 app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
 
+app.use((req, res, next) => {
+    res.locals.currentUser = req.user;
+    next();
+})
+
+//Passport Config
+app.use(require("express-session")({
+    secret: "This is fucking weird!",
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new localStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+
+
 app.get("/", (req, res) => {
     res.render("landing");
 });
 
 app.get("/campgrounds", (req, res) => {
-    // res.render("campgrounds", { campgrounds: campgrounds });
-    //Get all campgrounds from DB
+
     Campground.find({}, (err, allCampgrounds) => {
         if (err) {
             console.log(err);
@@ -73,8 +93,10 @@ app.get("/campgrounds/:id", (req, res) => {
 });
 
 // ! ====================================== !
+// !               COMMENTS                 !
+// ! ====================================== !
 
-app.get("/campgrounds/:id/comments/new", (req, res) => {
+app.get("/campgrounds/:id/comments/new", isLoggedIn, (req, res) => {
     //find campground by id
     Campground.findById(req.params.id, (err, campground) => {
         if (err) {
@@ -86,7 +108,7 @@ app.get("/campgrounds/:id/comments/new", (req, res) => {
     })
 })
 
-app.post("/campgrounds/:id/comments", (req, res) => {
+app.post("/campgrounds/:id/comments", isLoggedIn, (req, res) => {
     Campground.findById(req.params.id, (err, campground) => {
         if (err) {
             console.log(err)
@@ -105,6 +127,51 @@ app.post("/campgrounds/:id/comments", (req, res) => {
         }
     })
 })
+
+// ! =================================
+app.get("/register", (req, res) => {
+    res.render("register");
+})
+
+app.post("/register", (req, res) => {
+    var newUser = new User({ username: req.body.username });
+    User.register(newUser, req.body.password, (err, user) => {
+        if (err) {
+            console.log(err);
+            return res.render("register")
+        }
+        passport.authenticate("local")(req, res, () => {
+            res.redirect("/campgrounds");
+        })
+    })
+})
+
+
+app.get("/login", (req, res) => {
+    res.render("login");
+})
+
+app.post("/login",
+    passport.authenticate("local",
+        {
+            successRedirect: "/campgrounds",
+            failureRedirect: "/login"
+        }))
+
+//logout
+app.get("/logout", (req, res) => {
+    req.logOut();
+    res.redirect("/campgrounds");
+})
+
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    else {
+        res.redirect("/login");
+    }
+}
 
 
 app.listen(3000, () => {
