@@ -6,7 +6,8 @@ var seedDb = require("./seeddb");
 var passport = require("passport");
 var localStrategy = require("passport-local");
 
-seedDb();
+// seedDb();
+
 //MODELS
 var Campground = require("./models/campground");
 var Comment = require("./models/comment");
