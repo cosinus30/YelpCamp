@@ -45,11 +45,7 @@ router.get("/new", isLoggedIn, (req, res) => {
     res.render("campground/new");
 });
 
-
-//SHOW ROUTE
 router.get("/:id", (req, res) => {
-    //find the campground with provided id
-    //render that item.
     Campground.findById(req.params.id).populate("comments").exec((err, foundCampground) => {
         if (err) {
             console.log(err);
@@ -58,6 +54,39 @@ router.get("/:id", (req, res) => {
         }
     });
 });
+
+router.get("/:id/edit", (req, res) => {
+    Campground.findById(req.params.id, (err, foundCampground) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.render("campground/edit", { campground: foundCampground });
+        }
+    });
+})
+
+router.put("/:id", (req, res) => {
+    Campground.findByIdAndUpdate(req.params.id, req.body.campground, (err, updatedCampground) => {
+        if (err) {
+            console.log("/campgrounds");
+        } else {
+            res.redirect("/campgrounds/" + req.params.id);
+        }
+    });
+})
+
+router.delete("/:id", (req, res) => {
+    Campground.findByIdAndRemove(req.params.id, (err) => {
+        if (err) {
+            res.redirect("/campgrounds")
+        }
+        else {
+            res.redirect("/campgrounds")
+        }
+    })
+})
+
+
 
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) {
