@@ -6,6 +6,7 @@ var seedDb = require("./seeddb");
 var passport = require("passport");
 var localStrategy = require("passport-local");
 var methodOverride = require("method-override")
+var flash = require("connect-flash");
 
 // seedDb();
 
@@ -28,6 +29,7 @@ app.use(methodOverride("_method"));
 app.use(bodyParser.urlencoded({ encoded: true }));
 app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
+app.use(flash());
 
 
 //Passport Config
@@ -45,6 +47,9 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next) => {
     res.locals.currentUser = req.user;
+    res.locals.error = req.flash("error");
+    res.locals.success = req.flash("success");
+
     next();
 })
 
