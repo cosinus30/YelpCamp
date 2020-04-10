@@ -26,7 +26,7 @@ middlewareObject.checkCampgroundOwnership = function (req, res, next) {
                     next();
                 }
                 else {
-                    req.flash("Unauthorized acccess!")
+                    req.flash("error", "Unauthorized acccess!")
                     res.redirect("back")
                 }
             }
@@ -50,7 +50,7 @@ middlewareObject.checkCommentOwnership = function (req, res, next) {
                     next();
                 }
                 else {
-                    req.flash("Unauthorized acccess!")
+                    req.flash("error", "Unauthorized acccess!")
                     res.redirect("back")
                 }
             }

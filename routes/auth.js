@@ -33,14 +33,17 @@ router.get("/login", (req, res) => {
 router.post("/login",
     passport.authenticate("local",
         {
+            successFlash: "It is nice to see you here!",
             successRedirect: "/campgrounds",
+            failureFlash: "Well, interesting",
             failureRedirect: "/login"
+
         }))
 
 //logout
 router.get("/logout", (req, res) => {
     req.logOut();
-    req.flash("error", "Logged you out!");
+    req.flash("success", "Logged you out!");
     res.redirect("/campgrounds");
 })
 

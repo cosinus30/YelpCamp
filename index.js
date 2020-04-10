@@ -18,6 +18,7 @@ var User = require("./models/user");
 var commentRoute = require("./routes/comments");
 var campgroundRoute = require("./routes/campgrounds");
 var authRoute = require("./routes/auth");
+var userRoute = require("./routes/user");
 
 mongoose.connect("mongodb://localhost:27017/yelp_camp", {
     useNewUrlParser: true,
@@ -49,13 +50,13 @@ app.use((req, res, next) => {
     res.locals.currentUser = req.user;
     res.locals.error = req.flash("error");
     res.locals.success = req.flash("success");
-
     next();
 })
 
 app.use("/", authRoute);
 app.use("/campgrounds/:id/comments", commentRoute);
 app.use("/campgrounds", campgroundRoute);
+app.use("/user", userRoute);
 
 app.listen(3000, () => {
     console.log("Running!");

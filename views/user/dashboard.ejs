@@ -1,0 +1,43 @@
+<%- include("../partials/header") %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-9 mx-auto">
+            <div class="card p-3">
+                <ul class="card-body">
+                    <% if (campgrounds.length == 0) { %>
+                    <div class="card-title">
+                        <h4>Unfortunately you don't have any campground!</h4>
+                        <a href="/campgrounds/new" class="active">Wanna add some?</a>
+                    </div>
+                    <% } else { %>
+                    <div class=" card-title">
+                        <h4>Your uploaded campgrounds</h4>
+                    </div>
+                    <ul class="card-text">
+                        <ul class="list-unstyled">
+                            <% campgrounds.forEach((campground) => { %>
+                            <li class="media">
+                                <img class="mr-3" src="<%= campground.image %> " style="max-width: 25%;"
+                                    alt="Campground Image">
+                                <div class="media-body">
+                                    <h5 class="mt-0 mb-1"><%= campground.name %> </h5>
+                                    <p><%= campground.description %> </p>
+                                </div>
+                            </li>
+                            <hr>
+                            <% }) %>
+                        </ul>
+                    </ul>
+
+                    <%}%>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</div>
+
+<%- include("../partials/footer") %>
