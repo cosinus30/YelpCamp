@@ -2,20 +2,29 @@
 
 <div class="container">
     <div class="row">
-        <h1 style="text-align: center;">Edit Comment</h1>
-        <div style="width: 30%; margin: 25px auto">
+        <div class="col-md-8 mx-auto">
+            <h1 style="text-align: center; margin-top: 15%;">Edit Comment</h1>
             <form action="/campgrounds/<%=campground_id%>/comments/<%=comment._id%>?_method=PUT" method="POST">
                 <div class="form-group">
                     <input class="form-control" type="text" value="<%=comment.text%>" name="comment[text]" />
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-md btn-success btn-block">
-                        Submit
-                    </button>
+                    <div class="input-group">
+                        <button class="btn btn-md mx-auto btn-primary">
+                            Submit
+                        </button>
+                    </div>
                 </div>
             </form>
+            <a href="/campgrounds/<%=campground_id%>" class="btn btn-md go-back">
+                <svg class="bi bi-chevron-compact-left" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M9.224 1.553a.5.5 0 01.223.67L6.56 8l2.888 5.776a.5.5 0 11-.894.448l-3-6a.5.5 0 010-.448l3-6a.5.5 0 01.67-.223z"
+                        clip-rule="evenodd" />
+                </svg>Go Back</a>
+            </form>
         </div>
-        <a href="/campgrounds/<%=campground_id%>" class="btn btn-danger btn-md">Go Back</a>
     </div>
 </div>
 <%- include("../partials/footer") %>

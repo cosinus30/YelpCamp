@@ -10,60 +10,125 @@
                 <li class="list-group-item">Info 1</li>
             </div>
         </div>
-        <div class="col-md-9">
-            <div class="thumbnail">
-                <img class="img-responsive" src="<%=campground.image%>" alt="" />
-                <div class="caption-full caption">
-                    <h4 class="pull-right">$9.00/Night</h4>
-                    <h4><a href="">
-                            <p><%=campground.name%></p>
-                        </a></h4>
-                    <p><%=campground.description%></p>
-                    <p>Submitted by <em><%=campground.author.username%></em></p>
-                    <% if(currentUser && campground.author.id.equals(currentUser._id)){ %>
-                    <a class="btn btn-warning" href="/campgrounds/<%=campground._id%>/edit">Edit</a>
-                    <form class="delete-form" action="/campgrounds/<%=campground._id%>?_method=delete" method="POST">
-                        <button class="btn btn-danger">Delete</button>
-                    </form>
-                    <% } %>
-                </div>
-            </div>
-            <div class="well">
-                <div class="text-right"> <a class="btn btn-success"
-                        href="/campgrounds/<%= campground._id %>/comments/new">Add new
-                        comment</a>
-                </div>
-                <hr>
-                <% campground.comments.forEach((comment) => { %>
-                <div class="row">
-                    <div class="col-md-12">
-                        <strong><%= comment.author.username %></strong>
-                        <span class="pull-right day-time">10 Days Ago</span>
-                        <p>
-                            <%= comment.text %>
-                        </p>
-                        <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
-                        <div class="pull-right">
-                            <a class="btn btn-xs btn-warning"
-                                href="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>/edit">Edit</a>
-                            <form class="delete-form "
-                                action="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>?_method=DELETE"
-                                method="post">
-                                <button class="btn btn-xs btn-danger">Delete</button>
-                            </form>
-                        </div>
+        <div class="col-md-9 mp-3">
+            <div class="card">
+                <img class="card-img-top" src="<%=campground.image%>" alt="" />
+                <div class="card-body">
+                    <div class="card-title">
+                        <h4 class="float-right">$9.00/Night</h4>
+                        <h4>
+                            <a href="">
+                                </p><%=campground.name%>
+                            </a>
+                        </h4>
+                    </div>
+                    <div class="card-text">
+                        <p><%=campground.description%></p>
+                        <p>Submitted by <em><%=campground.author.username%></em></p>
+                        <% if(currentUser && campground.author.id.equals(currentUser._id)){ %>
+                        <a class="btn btn-warning" href="/campgrounds/<%=campground._id%>/edit">Edit
+                            <svg class="bi bi-pencil-square" width="1em" height="1em" viewBox="0 0 16 16"
+                                fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M15.502 1.94a.5.5 0 010 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 01.707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 00-.121.196l-.805 2.414a.25.25 0 00.316.316l2.414-.805a.5.5 0 00.196-.12l6.813-6.814z" />
+                                <path fill-rule="evenodd"
+                                    d="M1 13.5A1.5 1.5 0 002.5 15h11a1.5 1.5 0 001.5-1.5v-6a.5.5 0 00-1 0v6a.5.5 0 01-.5.5h-11a.5.5 0 01-.5-.5v-11a.5.5 0 01.5-.5H9a.5.5 0 000-1H2.5A1.5 1.5 0 001 2.5v11z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                        <form class="delete-form" action="/campgrounds/<%=campground._id%>?_method=delete"
+                            method="POST">
+                            <button class="btn btn-danger">Delete
+                                <svg class="bi bi-trash" width="1em" height="1em" viewBox="0 0 16 16"
+                                    fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M5.5 5.5A.5.5 0 016 6v6a.5.5 0 01-1 0V6a.5.5 0 01.5-.5zm2.5 0a.5.5 0 01.5.5v6a.5.5 0 01-1 0V6a.5.5 0 01.5-.5zm3 .5a.5.5 0 00-1 0v6a.5.5 0 001 0V6z" />
+                                    <path fill-rule="evenodd"
+                                        d="M14.5 3a1 1 0 01-1 1H13v9a2 2 0 01-2 2H5a2 2 0 01-2-2V4h-.5a1 1 0 01-1-1V2a1 1 0 011-1H6a1 1 0 011-1h2a1 1 0 011 1h3.5a1 1 0 011 1v1zM4.118 4L4 4.059V13a1 1 0 001 1h6a1 1 0 001-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                        </form>
                         <% } %>
-
-
                     </div>
                 </div>
-                <% }) %>
+            </div>
+
+
+            <div class="card" style="margin-top: 3%;">
+                <div class="card-body">
+                    <div class="card-title">
+                        <div class=""> <a class="btn btn-success"
+                                href="/campgrounds/<%= campground._id %>/comments/new">Add new
+                                comment
+                                <svg class="bi bi-plus-circle" width="1.2em" height="1.2em" viewBox="0 0 16 16"
+                                    fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M8 3.5a.5.5 0 01.5.5v4a.5.5 0 01-.5.5H4a.5.5 0 010-1h3.5V4a.5.5 0 01.5-.5z"
+                                        clip-rule="evenodd" />
+                                    <path fill-rule="evenodd"
+                                        d="M7.5 8a.5.5 0 01.5-.5h4a.5.5 0 010 1H8.5V12a.5.5 0 01-1 0V8z"
+                                        clip-rule="evenodd" />
+                                    <path fill-rule="evenodd"
+                                        d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z"
+                                        clip-rule="evenodd" />
+                                </svg></a>
+                        </div>
+                        <hr>
+                    </div>
+                    <div class="card-text">
+                        <div class="list-group">
+                            <% campground.comments.forEach((comment) => { %>
+                            <div class="list-group-item border-0 list-group-item-action flex-column align-items-start">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <strong class="mb-1"><%= comment.author.username %></strong>
+                                    <small>3 days ago</small>
+                                </div>
+                                <div class="mb-1">
+                                    <p>
+                                        <%= comment.text %>
+                                    </p>
+                                    <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+                                    <div class="">
+                                        <a class="btn btn-xs btn-warning"
+                                            href="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>/edit">Edit
+                                            <svg class="bi bi-pencil-square" width="1em" height="1em"
+                                                viewBox="0 0 16 16" fill="currentColor"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M15.502 1.94a.5.5 0 010 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 01.707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 00-.121.196l-.805 2.414a.25.25 0 00.316.316l2.414-.805a.5.5 0 00.196-.12l6.813-6.814z" />
+                                                <path fill-rule="evenodd"
+                                                    d="M1 13.5A1.5 1.5 0 002.5 15h11a1.5 1.5 0 001.5-1.5v-6a.5.5 0 00-1 0v6a.5.5 0 01-.5.5h-11a.5.5 0 01-.5-.5v-11a.5.5 0 01.5-.5H9a.5.5 0 000-1H2.5A1.5 1.5 0 001 2.5v11z"
+                                                    clip-rule="evenodd" />
+                                            </svg></a>
+                                        <form class="delete-form"
+                                            action="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>?_method=DELETE"
+                                            method="post">
+                                            <button class="btn btn-xs btn-danger">Delete
+                                                <svg class="bi bi-trash" width="1em" height="1em" viewBox="0 0 16 16"
+                                                    fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M5.5 5.5A.5.5 0 016 6v6a.5.5 0 01-1 0V6a.5.5 0 01.5-.5zm2.5 0a.5.5 0 01.5.5v6a.5.5 0 01-1 0V6a.5.5 0 01.5-.5zm3 .5a.5.5 0 00-1 0v6a.5.5 0 001 0V6z" />
+                                                    <path fill-rule="evenodd"
+                                                        d="M14.5 3a1 1 0 01-1 1H13v9a2 2 0 01-2 2H5a2 2 0 01-2-2V4h-.5a1 1 0 01-1-1V2a1 1 0 011-1H6a1 1 0 011-1h2a1 1 0 011 1h3.5a1 1 0 011 1v1zM4.118 4L4 4.059V13a1 1 0 001 1h6a1 1 0 001-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
+                                                        clip-rule="evenodd" />
+                                                </svg>
+                                            </button>
+                                        </form>
+                                    </div>
+                                    <% } %>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <% }) %>
+                    </div>
+                </div>
             </div>
         </div>
-
     </div>
-
 </div>
+
 
 
 <%- include("../partials/footer") %>

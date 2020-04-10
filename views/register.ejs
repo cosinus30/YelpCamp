@@ -1,9 +1,38 @@
 <%- include("./partials/header") %>
 
-<form action="/register" method="POST">
-    <input type="text" placeholder="username" name="username">
-    <input type="password" name="password" placeholder="password">
-    <button>Submit</button>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-lg-8 mx-auto" style="margin-top: 10%;">
+            <div class=" row">
+                <div class="col-md-8 col-lg-8 mx-auto" style="align-items: center;">
+                    <h3 style="margin-bottom: 5%;">Register</h3>
 
-</form>
+                    <form action=" /register" method="POST">
+                        <label for="username">Username</label>
+                        <div class="form-group">
+                            <input type="text" id="username" class="form-control" placeholder="username"
+                                name="username">
+
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+
+                            <input type="password" id="password" class="form-control" name="password"
+                                placeholder="password">
+
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-md mx-auto btn-primary btn-block">
+                                Submit
+                            </button>
+                            <button class="btn btn-md mx-auto btn-danger btn-block">
+                                I forgot my password
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <%- include("./partials/footer") %>

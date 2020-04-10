@@ -29,7 +29,7 @@
 		<li class="nav-item"><a class= "nav-link" href="/login">Login</a></li>
 		<li class="nav-item"><a class= "nav-link" href="/register">Signup</a></li>
 		<%}else{%>
-		<li class="nav-item"><a class= "nav-link">Signed in as <%=currentUser.username%></a></li>
+		<li class="nav-item"><a class= "nav-link" href="/user"> <%=currentUser.username%></a></li>
 		<li class="nav-item"><a class= "nav-link" href="/logout">Logout</a></li>
 		<%}%>
     </ul>
@@ -40,7 +40,7 @@
 <%if(error && error.length > 0){%>
 	<div class="alert-wrap">
 		<div class="alert alert-danger alert-dismissible fade show" role="alert">
-		  <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+		  <strong>Ooops!</strong> <%=error%>
 		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
 			<span aria-hidden="true">&times;</span>
 		  </button>
@@ -51,7 +51,7 @@
 <%if(success && success.length > 0){%>
 	<div class="alert-wrap">
 		<div class="alert alert-success alert-dismissible fade show" role="alert">
-		  <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+		  <strong>Hoooray!</strong> <%=success%>
 		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
 			<span aria-hidden="true">&times;</span>
 		  </button>
