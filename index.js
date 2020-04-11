@@ -18,10 +18,12 @@ var campgroundRoute = require("./routes/campgrounds");
 var authRoute = require("./routes/auth");
 var userRoute = require("./routes/user");
 
-mongoose.connect("mongodb://localhost:27017/yelp_camp", {
+mongoose.connect(process.env.DATABASEURL, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
+
+console.log(process.env.DATABASEURL);
 
 //CONFIGS
 app.use(methodOverride("_method"));
