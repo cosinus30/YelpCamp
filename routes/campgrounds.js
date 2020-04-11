@@ -14,12 +14,11 @@ router.get("/", (req, res) => {
     });
 });
 
-//one is get one is post
 router.post("/", middleware.isLoggedIn, (req, res) => {
-    //retrieve data from form1
     var name = req.body.campground.name;
     var image = req.body.campground.image;
     var description = req.body.campground.description;
+    var cost = req.body.campground.cost;
     var author = {
         id: req.user._id,
         username: req.user.username
@@ -28,7 +27,8 @@ router.post("/", middleware.isLoggedIn, (req, res) => {
         name: name,
         image: image,
         description: description,
-        author: author
+        author: author,
+        cost: cost
     }
     //create a new campground and save to DB
     Campground.create(newCampground, (err, newlyCreated) => {

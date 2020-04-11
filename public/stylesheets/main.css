@@ -1,4 +1,8 @@
 
+body{
+    font-family: 'Baloo Paaji 2', cursive;
+}
+
 .delete-form{
     display: inline;
 }

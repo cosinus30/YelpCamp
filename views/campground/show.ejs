@@ -15,7 +15,7 @@
                 <img class="card-img-top" src="<%=campground.image%>" alt="" />
                 <div class="card-body">
                     <div class="card-title">
-                        <h4 class="float-right">$9.00/Night</h4>
+                        <h4 class="float-right">$<%= campground.cost %> /Night</h4>
                         <h4>
                             <a href="">
                                 </p><%=campground.name%>
@@ -82,7 +82,8 @@
                             <div class="list-group-item border-0 list-group-item-action flex-column align-items-start">
                                 <div class="d-flex w-100 justify-content-between">
                                     <strong class="mb-1"><%= comment.author.username %></strong>
-                                    <small>3 days ago</small>
+                                    <small><%= comment.created.toString().substring(0, comment.created.toString().indexOf("GMT")) %>
+                                    </small>
                                 </div>
                                 <div class="mb-1">
                                     <p>
