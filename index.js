@@ -20,10 +20,10 @@ var userRoute = require("./routes/user");
 
 mongoose.connect(process.env.DATABASEURL, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useCreateIndex: true,
 });
 
-console.log(process.env.DATABASEURL);
 
 //CONFIGS
 app.use(methodOverride("_method"));
