@@ -22,7 +22,9 @@ mongoose.connect(process.env.DATABASEURL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
-});
+    useMongoClient: true
+}).then(() => console.log(`Database connected`))
+    .catch(err => console.log(`Database connection error: ${err.message}`));
 
 
 //CONFIGS
