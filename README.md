@@ -8,7 +8,7 @@ Yelp camp is an website for viewing campgrounds, uploading campgrounds and makin
 ----------
 https://nameless-escarpment-20086.herokuapp.com/
 
-###Site
+### Site
 ----------
 ##### Landing Page
 ![Screenshot](/Screenshots/Landing-1.PNG)
