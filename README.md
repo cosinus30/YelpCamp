@@ -32,11 +32,11 @@ Everyone can look campgrounds.
 ![Screenshot](/Screenshots/AddComment.png)
 
 ##### Login page
-![Screenshot](/Screenshots/Login.png)
+![Screenshot](/Screenshots/Login.PNG)
 
 
 ##### Register page
-![Screenshot](/Screenshots/Register.png)
+![Screenshot](/Screenshots/Register.PNG)
 
 ##### User page
 * Users can look their campgrounds on user page.
