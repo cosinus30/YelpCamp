@@ -16,31 +16,31 @@ https://nameless-escarpment-20086.herokuapp.com/
 
 ##### Campgrounds Page
 Everyone can look campgrounds.
-![Screenshot](/Screenshots/Campgrounds.PNG)
+![Screenshot](/Screenshots/Campgrounds.png)
 
 ###### Campground detail
 * Users can delete and edit their campgrounds on campground detail page.
 * Users can add, delete and edit their comments on campground detail page.
-![Screenshot](/Screenshots/Campground.PNG)
+![Screenshot](/Screenshots/Campground.png)
 
 ###### Create campground
 * Users can create campgrounds.
-![Screenshot](/Screenshots/CreateCampground.PNG)
+![Screenshot](/Screenshots/CreateCampground.png)
 
 ###### Campground show page
 * Users can add comments.
-![Screenshot](/Screenshots/AddComment.PNG)
+![Screenshot](/Screenshots/AddComment.png)
 
 ##### Login page
-![Screenshot](/Screenshots/Login.PNG)
+![Screenshot](/Screenshots/Login.png)
 
 
 ##### Register page
-![Screenshot](/Screenshots/Register.PNG)
+![Screenshot](/Screenshots/Register.png)
 
 ##### User page
 * Users can look their campgrounds on user page.
-![Screenshot](/Screenshots/User.PNG)
+![Screenshot](/Screenshots/User.png)
 
 #### Mobile Support
 ----------
